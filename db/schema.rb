@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_092520) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_094215) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.json "recipient"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tariff_id", null: false
+    t.index ["tariff_id"], name: "index_orders_on_tariff_id"
   end
 
   create_table "tariffs", force: :cascade do |t|
@@ -25,4 +27,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_092520) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "orders", "tariffs"
 end
