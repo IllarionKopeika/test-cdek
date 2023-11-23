@@ -7,13 +7,16 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @tariff = Tariff.find(params[:tariff_id])
   end
 
   def show
   end
 
   def create
+    @tariff = Tariff.find(params[:tariff_id])
     @order = Order.new(order_params)
+    @order.tariff = @tariff
     if @order.save
       redirect_to order_path(@order)
     else
@@ -39,7 +42,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:number)
+    params.require(:order).permit(:number, :tariff_id)
   end
 
   def set_order
