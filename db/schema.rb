@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_075026) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_092520) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.json "recipient"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tariffs", force: :cascade do |t|
+    t.integer "tariff_code"
+    t.string "tariff_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

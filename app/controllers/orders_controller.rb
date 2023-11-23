@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
     @orders = Order.all
@@ -13,10 +13,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(params[:order])
-    @order.save
-
-    redirect_to order_path(@order)
+    @order = Order.new(order_params)
+    if @order.save
+      redirect_to order_path(@order)
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   def edit
